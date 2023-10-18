@@ -12,8 +12,8 @@ import model.Observer.Observer;
 public class Player implements ISkill{
 
 	private AbstractCharacter c;
-	private int xPosition = 0;
-	private int yPosition = 0;
+	public int xPosition = 0;
+	public int yPosition = 0;
 	private int health = 10;
 	public Bullet b = new Bullet("ruta");
 	public MovingBullet m = new MovingBullet(xPosition, yPosition, b);
@@ -50,6 +50,19 @@ public class Player implements ISkill{
 		m.move(xPosition, yPosition);      
 		//draw()
 	}
+	public void changeXDelta(int value) {
+		this.xPosition += value;
+	}
+	public void changeYDelta(int value) {
+		this.yPosition += value;
+	}
+	public void setRectPos(int x, int y) {
+		this.xPosition = x;
+		this.yPosition = y;
+	}
+	
+	
+	
 	public void jump() {
 		this.yPosition += 5;
 	}

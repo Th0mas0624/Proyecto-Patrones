@@ -10,7 +10,8 @@ import model.Decorator.Player;
 
 public class GamePanel extends JPanel{
 	
-	private int xDelta = 100, yDelta = 100;
+	public Player player = Player.getInstance(100, 100);
+	
 	
 	public GamePanel() {
 		setPanelSize();
@@ -21,29 +22,12 @@ public class GamePanel extends JPanel{
 	private void setPanelSize() {
 		Dimension size = new Dimension(1200, 700);
 		setPreferredSize(size);
-	}
-	
-
-	public void changeXDelta(int value) {
-		this.xDelta += value;
-		repaint();
-	}
-
-	public void changeYDelta(int value) {
-		this.yDelta += value;
-		repaint();
-	}
-	
-	public void setRectPos(int x, int y) {
-		this.xDelta = x;
-		this.yDelta = y;
-		repaint();
-	}
+	}	
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		g.fillRect(xDelta, yDelta, 200, 50);
+		g.fillRect(player.xPosition, player.yPosition, 200, 50);
+		repaint();
 
 	}
 

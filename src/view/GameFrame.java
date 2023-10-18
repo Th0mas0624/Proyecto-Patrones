@@ -13,7 +13,7 @@ public class GameFrame extends JFrame {
         this.setTitle("Mi Juego");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        //setFrameSize();
+        setFrameSize();
 
         // Agregar panel
         this.add(gamePanel);
