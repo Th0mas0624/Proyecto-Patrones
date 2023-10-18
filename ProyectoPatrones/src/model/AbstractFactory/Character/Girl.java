@@ -8,7 +8,7 @@ public class Girl implements AbstractCharacter{
 
 	@Override
 	public Image createImage() {
-		return null;
+		return ImageGirl.getInstance();
 	}
 
 	@Override
