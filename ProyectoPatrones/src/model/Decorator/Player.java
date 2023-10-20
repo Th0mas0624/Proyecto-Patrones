@@ -12,18 +12,31 @@ import model.Observer.Observer;
 public class Player implements ISkill{
 
 	private AbstractCharacter c;
-	private int xPosition = 0;
-	private int yPosition = 0;
+	public int xPosition = 0;
+	public int yPosition = 0;
 	private int health = 10;
 	public Bullet b = new Bullet("ruta");
 	public MovingBullet m = new MovingBullet(xPosition, yPosition, b);
 	
 //	private List<Observer> observers = new ArrayList<>();
+	
+	// Instancia única del Singleton
+    private static Player instance;
 
-	public Player(AbstractCharacter c) {
-		this.c = c;
-		c.createImage();
-	}
+    private Player(float x, float y) {
+        this.xPosition = (int) x;
+        this.yPosition = (int) y;
+    }
+
+    public static Player getInstance(float x, float y) {
+        if (instance == null) {
+            instance = new Player(x, y);
+        }
+        return instance;
+    }
+	
+	
+	
 	@Override
 	public void operation() {
 		shoot();
@@ -37,6 +50,19 @@ public class Player implements ISkill{
 		m.move(xPosition, yPosition);      
 		//draw()
 	}
+	public void changeXDelta(int value) {
+		this.xPosition += value;
+	}
+	public void changeYDelta(int value) {
+		this.yPosition += value;
+	}
+	public void setRectPos(int x, int y) {
+		this.xPosition = x;
+		this.yPosition = y;
+	}
+	
+	
+	
 	public void jump() {
 		this.yPosition += 5;
 	}
