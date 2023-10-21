@@ -10,7 +10,7 @@ public class WeaponMan implements Weapon{
 	}
 	@Override
 	public String getWeapon() {
-		return ImageMan.getInstance().getImage()+"/imagen.png";
+		return ImageMan.getInstance().getImage()+"/man.png";
 	}
 
 }
