@@ -17,6 +17,7 @@ public class Player implements ISkill {
 	private int health = 10;
 	public Bullet b = new Bullet("assets/bullet.png");
 	public MovingBullet m;
+	private int jumps = 100;
 	
 	private java.util.List<Observer> observers = new ArrayList<>();
 	
@@ -39,8 +40,9 @@ public class Player implements ISkill {
 	
 	
 	@Override
-	public void operation() {
+	public int operation() {
 		shoot();
+		return 0;
 	}
 	public void gravity(){
 		if (yPosition < Constans.FIRST_FLOOR-3){
@@ -77,7 +79,7 @@ public class Player implements ISkill {
 		this.c = c;
 	}
 	public void jump() {
-		this.yPosition -= 100;
+		this.yPosition -= jumps;
 	}
 	public void moveRight() {
 		this.xPosition += 2;
@@ -106,4 +108,8 @@ public class Player implements ISkill {
             observer.updatePlayerHealth(health);
         }
     }
+
+	public void SetJumps(int jumps){
+		this.jumps = jumps;
+	}
 }

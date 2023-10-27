@@ -3,6 +3,7 @@ package controller.inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import model.Decorator.SuperJump;
 import view.GamePanel;
 
 public class KeyboardInputs implements KeyListener {
@@ -55,6 +56,10 @@ public class KeyboardInputs implements KeyListener {
 			if(gamePanel.getZPress() == true){
 				gamePanel.player.operation();
 			}
+			break;
+		case KeyEvent.VK_K:
+			SuperJump s = new SuperJump(gamePanel.player);
+			gamePanel.player.SetJumps(s.operation());
 			break;
 		}
 
