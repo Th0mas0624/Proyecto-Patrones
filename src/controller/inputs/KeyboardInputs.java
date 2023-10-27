@@ -37,6 +37,7 @@ public class KeyboardInputs implements KeyListener {
 			break;
 		case KeyEvent.VK_A:
 			gamePanel.player.changeXDelta(-5);
+			System.out.println(gamePanel.player.xPosition);
 			break;
 		case KeyEvent.VK_S:
 			gamePanel.player.changeYDelta(5);
@@ -44,6 +45,8 @@ public class KeyboardInputs implements KeyListener {
 			break;
 		case KeyEvent.VK_D:
 			gamePanel.player.changeXDelta(5);
+			System.out.println(gamePanel.player.xPosition);
+
 			break;
 		}
 

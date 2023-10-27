@@ -60,7 +60,10 @@ public class Player implements ISkill {
 		//draw()
 	}
 	public void changeXDelta(int value) {
-		this.xPosition += value;
+		if (xPosition<=10185){
+			this.xPosition += value;
+		}
+
 	}
 	public void changeYDelta(int value) {
 		this.yPosition += value;

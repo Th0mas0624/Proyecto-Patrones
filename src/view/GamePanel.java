@@ -5,11 +5,13 @@ import java.awt.*;
 import javax.swing.*;
 
 import controller.inputs.KeyboardInputs;
+import model.entitys.Background;
 import model.entitys.Player;
 
 public class GamePanel extends JPanel{
 	private ImageIcon playerImage; // Variable para la imagen del jugador
 	private ImageIcon backgroundImage;
+	private Background background = new Background();
 
 
 	public Player player = Player.getInstance(100, 100);
@@ -38,7 +40,7 @@ public class GamePanel extends JPanel{
 		int newWidth = (int) (backgroundImage.getIconWidth() * ((double)getHeight() / backgroundImage.getIconHeight()));
 		
 		// Dibuja la imagen de fondo
-		g.drawImage(backgroundImage.getImage(), 0, 0, newWidth, getHeight(), this);
+		g.drawImage(backgroundImage.getImage(), Background.x, 0, newWidth, getHeight(), this);
 		
 		// Escala el ImageIcon del jugador al nuevo tamaño
 		int newPlayerWidth = 75; // Nueva anchura del jugador en píxeles
@@ -46,8 +48,17 @@ public class GamePanel extends JPanel{
 		ImageIcon scaledPlayerIcon = new ImageIcon(playerImage.getImage().getScaledInstance(newPlayerWidth, newPlayerHeight, Image.SCALE_DEFAULT));
 		
 		// Pinta el ImageIcon escalado del jugador
-		scaledPlayerIcon.paintIcon(this, g, player.xPosition, player.yPosition);
+		if(player.xPosition>570){
+			scaledPlayerIcon.paintIcon(this, g, 570, player.yPosition);
+		}else{
+			scaledPlayerIcon.paintIcon(this, g, player.xPosition, player.yPosition);
+		}
+
+
+
+
 		player.gravity();
+		background.refresh_background();
 		repaint();
 	}
 	
