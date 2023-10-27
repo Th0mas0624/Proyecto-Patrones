@@ -1,10 +1,13 @@
 package model.entitys;
 
+import java.util.ArrayList;
+
 import helps.Constans;
 import model.AbstractFactory.AbstractCharacter;
 import model.Decorator.ISkill;
 import model.Flyweight.Bullet;
 import model.Flyweight.MovingBullet;
+import model.Observer.Observer;
 
 public class Player implements ISkill {
 
@@ -15,7 +18,7 @@ public class Player implements ISkill {
 	public Bullet b = new Bullet("assets/bullet.png");
 	public MovingBullet m;
 	
-//	private List<Observer> observers = new ArrayList<>();
+	private java.util.List<Observer> observers = new ArrayList<>();
 	
 	// Instancia única del Singleton
     private static Player instance;
@@ -38,9 +41,6 @@ public class Player implements ISkill {
 	@Override
 	public void operation() {
 		shoot();
-		jump();
-		moveRight();
-		moveLeft();
 	}
 	public void gravity(){
 		if (yPosition < Constans.FIRST_FLOOR-3){
@@ -56,7 +56,6 @@ public class Player implements ISkill {
 
 	}
 	public void shoot() {
-		c.createWeapon().getWeapon();
 		m.move();      
 		//draw()
 	}
@@ -93,7 +92,7 @@ public class Player implements ISkill {
 		this.health -= damage;
 	}
 
-	/*public void addObserver(Observer observer) {
+	public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
@@ -106,5 +105,5 @@ public class Player implements ISkill {
             observer.updatePlayer(this);
             observer.updatePlayerHealth(health);
         }
-    }*/
+    }
 }

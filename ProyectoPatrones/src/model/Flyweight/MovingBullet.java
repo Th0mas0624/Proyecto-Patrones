@@ -1,15 +1,11 @@
 package model.Flyweight;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.util.HashMap;
 
-import javax.swing.ImageIcon;
 
 public class MovingBullet {
 
 	private float x,y;
-	private Bullet state;
 	private HashMap<String, Bullet> bullets = new HashMap<>();
 	
 	
@@ -27,7 +23,7 @@ public class MovingBullet {
 	}
 	
 	public String uploadImage(String type) {
-		return "Pictures/Bullets/"+type+".png";
+		return "assets/"+type+".png";
 	}
 	public void move() {
 		this.x += 10;

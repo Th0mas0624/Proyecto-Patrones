@@ -3,8 +3,6 @@ package view;
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 
 public class GameGame extends JFrame {
 	
