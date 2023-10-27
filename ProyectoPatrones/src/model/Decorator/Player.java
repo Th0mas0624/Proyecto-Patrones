@@ -1,18 +1,12 @@
 package model.Decorator;
 
-import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.AbstractFactory.AbstractCharacter;
-import model.AbstractFactory.Character.Man;
-import model.Flyweight.Bullet;
 import model.Flyweight.MovingBullet;
-import model.Observer.Observer;
 
 public class Player implements ISkill{
 
-	private AbstractCharacter c = new Man();
+	private AbstractCharacter c;
 	public int xPosition = 0;
 	public int yPosition = 0;
 	private int health = 10;
@@ -23,14 +17,15 @@ public class Player implements ISkill{
 	
 	// Instancia única del Singleton
     private static Player instance;
-    private Player(float x, float y) {
+    private Player(float x, float y, AbstractCharacter c) {
+		this.c = c;
         this.xPosition = (int) x;
         this.yPosition = (int) y;
     }
 
-    public static Player getInstance(int x, int y) {
+    public static Player getInstance(int x, int y, AbstractCharacter c) {
         if (instance == null) {
-            instance = new Player(x, y);
+            instance = new Player(x, y, c);
         }
         instance.m = new MovingBullet(x, y);
         return instance;

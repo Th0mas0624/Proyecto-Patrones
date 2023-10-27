@@ -9,24 +9,27 @@ import javax.swing.JPanel;
 
 import controller.inputs.KeyboardInputs;
 import model.Decorator.Player;
-import model.Flyweight.MovingBullet;
 
 public class GamePanel extends JPanel{
 	
-	public Player player = Player.getInstance(100, 100);
+	public Player player;
 	private Image playerImage, bulletImage;
+	private ImageIcon backgroundImage;
 	
-	public GamePanel() {
+	public GamePanel(Player player) {
+		this. player = player;
 		setPanelSize();
-		addKeyListener(new KeyboardInputs(this));
 		createImage();
+		backgroundImage = new ImageIcon("Pictures/Fondo/NES-Contra-Level1.png");
+		addKeyListener(new KeyboardInputs(this));
+		
 	}
 	
 	public void createImage() {
 		//Player Image
 		ImageIcon icon = new ImageIcon(player.getC().createWeapon().getWeapon());
 		playerImage = icon.getImage();
-        // Cambiar el tamaño de la imagen (por ejemplo, a 100x100 píxeles)
+        // Cambiar el tamaño de la imagen a 100x100 píxeles
         playerImage = playerImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         //BulletImage
         /*player.m.getBullet("1").getImagen() lo correcto es que esto se haga directamente
@@ -43,6 +46,11 @@ public class GamePanel extends JPanel{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		int newWidth = (int) (backgroundImage.getIconWidth() * ((double)getHeight() / backgroundImage.getIconHeight()));
+		
+		// Dibuja todas las imagenes del juego
+		g.drawImage(backgroundImage.getImage(), 0, 0, newWidth, getHeight(), this);
 		g.drawImage(playerImage, player.xPosition, player.yPosition, this);
 		g.drawImage(bulletImage, player.m.getX(), player.m.getY(), this);
 		repaint();

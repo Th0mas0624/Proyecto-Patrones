@@ -27,7 +27,7 @@ public class MovingBullet {
 	}
 	
 	public String uploadImage(String type) {
-		return "./Pictures/Bullets/"+type+".png";
+		return "Pictures/Bullets/"+type+".png";
 	}
 	public void move() {
 		this.x += 10;

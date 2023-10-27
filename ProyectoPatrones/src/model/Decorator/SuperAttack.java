@@ -9,7 +9,7 @@ public class SuperAttack extends Decorator{
 	@Override
 	public void operation() {
 		super.operation();
-		Player player = Player.getInstance(200, 200);
+		Player player = Player.getInstance(200, 200, null);
 		player.setDamage(6);
 	}
 }

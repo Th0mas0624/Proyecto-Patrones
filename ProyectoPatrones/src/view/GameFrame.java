@@ -3,12 +3,10 @@ package view;
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
 
 public class GameFrame extends JFrame {
 	
-    public GameFrame(GamePanel gamePanel) {
+    public GameFrame(SelectPlayer selectPlayer) {
     	// Configura la ventana del juego
         this.setTitle("Mi Juego");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,7 +14,7 @@ public class GameFrame extends JFrame {
         setFrameSize();
 
         // Agregar panel
-        this.add(gamePanel);
+        this.setContentPane(selectPlayer);
         
         // Centra la ventana en la pantalla
         this.setLocationRelativeTo(null);
