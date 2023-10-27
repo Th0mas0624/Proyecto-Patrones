@@ -10,7 +10,7 @@ public class WeaponGirl implements Weapon{
 	}
 	@Override
 	public String getWeapon() {
-		return ImageGirl.getInstance().getImage()+"/1.png";
+		return ImageGirl.getInstance().getImage()+"/player_sprite1.png";
 	}
 
 }

@@ -9,6 +9,6 @@ public class ImageGirl implements Image{
 	}
 	@Override
 	public String getImage() {
-		return "Pictures/Women";
+		return "assets";
 	}
 }

@@ -1,6 +1,6 @@
 package model.Observer;
 
-import model.Decorator.Player;
+import model.entitys.Player;
 
 public interface Observer {
     void updatePlayer(Player playerModel);

@@ -1,62 +1,68 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import controller.inputs.KeyboardInputs;
-import model.Decorator.Player;
+import model.AbstractFactory.AbstractCharacter;
+import model.entitys.Background;
+import model.entitys.Player;
 
 public class GamePanel extends JPanel{
-	
-	public Player player;
-	private Image playerImage, bulletImage;
+	private ImageIcon playerImage; // Variable para la imagen del jugador
 	private ImageIcon backgroundImage;
-	
+	private Background background = new Background();
+
+	public Player player;
+	private AbstractCharacter c;
+
 	public GamePanel(Player player) {
-		this. player = player;
+
 		setPanelSize();
-		createImage();
-		backgroundImage = new ImageIcon("Pictures/Fondo/NES-Contra-Level1.png");
+		this.player = player;
+		// Carga la imagen del jugador desde un archivo (ajusta la ruta según tu imagen)
+		playerImage = new ImageIcon(this.player.getC().createWeapon().getWeapon());
+		backgroundImage = new ImageIcon("assets/NES-Contra-Level1.png");
+
 		addKeyListener(new KeyboardInputs(this));
-		
+		setFocusable(true);
 	}
-	
-	public void createImage() {
-		//Player Image
-		ImageIcon icon = new ImageIcon(player.getC().createWeapon().getWeapon());
-		playerImage = icon.getImage();
-        // Cambiar el tamaño de la imagen a 100x100 píxeles
-        playerImage = playerImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-        //BulletImage
-        /*player.m.getBullet("1").getImagen() lo correcto es que esto se haga directamente
-         * en la clase Player ya que es la imagen de la bala del arma predeterminada
-         */
-        bulletImage = new ImageIcon(player.m.getBullet("1").getImagen()).getImage();
-        
-	}
-	
+
 	private void setPanelSize() {
 		Dimension size = new Dimension(1200, 700);
 		setPreferredSize(size);
-	}	
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		// Calcula el ancho de la imagen de fondo para mantener la proporción
 		int newWidth = (int) (backgroundImage.getIconWidth() * ((double)getHeight() / backgroundImage.getIconHeight()));
 		
-		// Dibuja todas las imagenes del juego
-		g.drawImage(backgroundImage.getImage(), 0, 0, newWidth, getHeight(), this);
-		g.drawImage(playerImage, player.xPosition, player.yPosition, this);
-		g.drawImage(bulletImage, player.m.getX(), player.m.getY(), this);
+		// Dibuja la imagen de fondo
+		g.drawImage(backgroundImage.getImage(), Background.x, 0, newWidth, getHeight(), this);
+		
+		// Escala el ImageIcon del jugador al nuevo tamaño
+		int newPlayerWidth = 75; // Nueva anchura del jugador en píxeles
+		int newPlayerHeight = 75; // Nueva altura del jugador en píxeles
+		ImageIcon scaledPlayerIcon = new ImageIcon(playerImage.getImage().getScaledInstance(newPlayerWidth, newPlayerHeight, Image.SCALE_DEFAULT));
+		
+		// Pinta el ImageIcon escalado del jugador
+		if(player.xPosition>570){
+			scaledPlayerIcon.paintIcon(this, g, 570, this.player.yPosition);
+		}else{
+			scaledPlayerIcon.paintIcon(this, g, this.player.xPosition, this.player.yPosition);
+		}
+
+		player.gravity();
+		background.refresh_background();
 		repaint();
-
 	}
-
 	
+	
+
+
+
 
 }

@@ -1,7 +1,7 @@
-import controller.ButtonsCrontroller;
-import model.Decorator.Player;
+import controller.ButtonsController;
+import helps.Constans;
+import model.entitys.Player;
 import view.GameFrame;
-import view.GamePanel;
 import view.SelectPlayer;
 
 public class Game {
@@ -9,17 +9,19 @@ public class Game {
 	private Player player;
 	
 	public Game() {
-
-		ButtonsCrontroller e = new ButtonsCrontroller();
+		initClasses();
+		ButtonsController e = new ButtonsController();
 		SelectPlayer s = new SelectPlayer(e);
 		//GamePanel jp = new GamePanel();
 		GameFrame jf = new GameFrame(s);
 		e.setWindow(jf);
-		//jp.requestFocus();
 	}
 	
-	/*private void initClasses() {
-		player = player.getInstance(200, 200);
-	}*/
+	private void initClasses() {
+		player = player.getInstance(150, Constans.FIRST_FLOOR);
+	}
 
+	public static void main(String[] args) {
+		new Game();
+	}
 }

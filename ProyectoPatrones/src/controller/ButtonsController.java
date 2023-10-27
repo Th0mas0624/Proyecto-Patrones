@@ -1,5 +1,4 @@
 package controller;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,11 +7,12 @@ import javax.swing.JButton;
 import model.AbstractFactory.AbstractCharacter;
 import model.AbstractFactory.Character.Girl;
 import model.AbstractFactory.Character.Man;
-import model.Decorator.Player;
+import model.entitys.Player;
 import view.GameFrame;
+import view.GameGame;
 import view.GamePanel;
 
-public class ButtonsCrontroller implements ActionListener{
+public class ButtonsController implements ActionListener{
     
     private GameFrame w;
     private GamePanel g;
@@ -28,13 +28,16 @@ public class ButtonsCrontroller implements ActionListener{
             a = new Girl();
         }
 
-        player = Player.getInstance(100, 100, a);
+        player = Player.getInstance(100, 100);
+        player.setC(a);
         g = new GamePanel(player);
-        Container contentPane = this.w.getContentPane();
+        this.w.dispose();
+        GameGame game= new GameGame(g);
+        /*Container contentPane = this.w.getContentPane();
         contentPane.removeAll();
         contentPane.add(g);
         contentPane.revalidate();
-        contentPane.repaint();
+        contentPane.repaint();*/
         
     }
 
@@ -42,3 +45,4 @@ public class ButtonsCrontroller implements ActionListener{
         this.w = w;
     }
 }
+

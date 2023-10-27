@@ -8,12 +8,12 @@ import javax.swing.ImageIcon;
 
 public class MovingBullet {
 
-	private int x,y;
+	private float x,y;
 	private Bullet state;
 	private HashMap<String, Bullet> bullets = new HashMap<>();
 	
 	
-	public MovingBullet(int x, int y) {
+	public MovingBullet(float x, float y) {
 		
 		this.x = x;
 		this.y = y;
@@ -33,11 +33,11 @@ public class MovingBullet {
 		this.x += 10;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 	
