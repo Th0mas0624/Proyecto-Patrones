@@ -26,7 +26,7 @@ public class KeyboardInputs implements KeyListener {
 		// TODO Auto-generated method stub
 		switch (e.getKeyCode()) {
             case KeyEvent.VK_Z:
-                gamePanel.setZPress(false);
+                gamePanel.isZPressed = false;
                 break;
         }
 	}
@@ -52,10 +52,9 @@ public class KeyboardInputs implements KeyListener {
 			System.out.println(gamePanel.player.xPosition);
 			break;
 		case KeyEvent.VK_Z:
-			gamePanel.setZPress(true);
-			if(gamePanel.getZPress() == true){
-				gamePanel.player.operation();
-			}
+			
+			gamePanel.isZPressed = true;
+			
 			break;
 		case KeyEvent.VK_K:
 			SuperJump s = new SuperJump(gamePanel.player);

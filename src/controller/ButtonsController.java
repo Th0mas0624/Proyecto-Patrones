@@ -14,6 +14,7 @@ import view.GamePanel;
 public class ButtonsController implements ActionListener{
     
     private GameFrame gameFrame;
+
     private Player player;
     private AbstractCharacter abtractCharacter;
 
@@ -34,6 +35,7 @@ public class ButtonsController implements ActionListener{
         }
 
         player.setC(abtractCharacter);
+
         this.gameFrame.switchToGame();
         
         
