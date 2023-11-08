@@ -1,0 +1,17 @@
+package model.AbstractFactory.Character;
+
+import model.AbstractFactory.Weapon;
+
+public class WeaponGirl implements Weapon{
+
+	private static final WeaponGirl INSTANCE = new WeaponGirl();
+	public static WeaponGirl getInstance() {
+		return INSTANCE;
+	}
+	@Override
+	public String getWeapon() {
+		//assets\player_sprite1.png
+		return ImageGirl.getInstance().getImage()+"/player_sprite1.png";
+	}
+
+}
