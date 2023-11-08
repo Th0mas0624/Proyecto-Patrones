@@ -15,7 +15,11 @@ public class Game {
 	}
 	
 	private void initClasses() {
+		// Posición inicial del jugador
 		player = player.getInstance(150, Constans.FIRST_FLOOR);
+
+		// Se agrega lo siguiente para evitar que se bloquee el movimiento al empezar
+		player.jump();;
 	}
 
 }
