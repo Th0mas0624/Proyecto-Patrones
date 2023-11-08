@@ -12,59 +12,50 @@ public class GamePanel extends JPanel{
 	private ImageIcon playerImage; // Variable para la imagen del jugador
 	private ImageIcon backgroundImage;
 	private Background background = new Background();
-
-
 	public Player player = Player.getInstance(100, 100);
 
 
 	public GamePanel() {
-		setPanelSize();
+        loadAssets();
+        setPanelSize();
+        addKeyListener(new KeyboardInputs(this));
+    }
 
-		// Carga la imagen del jugador desde un archivo (ajusta la ruta según tu imagen)
-		playerImage = new ImageIcon("assets/player_sprite.png");
-		backgroundImage = new ImageIcon("assets/NES-Contra-Level1.png");
+    private void loadAssets() {
+        playerImage = new ImageIcon("assets/player_sprite.png");
+        backgroundImage = new ImageIcon("assets/NES-Contra-Level1.png");
+    }
 
-		addKeyListener(new KeyboardInputs(this));
+    private void setPanelSize() {
+        Dimension size = new Dimension(1200, 700);
+        setPreferredSize(size);
+    }
 
-	}
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawBackground(g);
+        drawPlayer(g);
+        updateGameObjects();
+        repaint();
+    }
 
-	private void setPanelSize() {
-		Dimension size = new Dimension(1200, 700);
-		setPreferredSize(size);
-	}
+    private void drawBackground(Graphics g) {
+        int newWidth = (int) (backgroundImage.getIconWidth() * ((double) getHeight() / backgroundImage.getIconHeight()));
+        g.drawImage(backgroundImage.getImage(), Background.x, 0, newWidth, getHeight(), this);
+    }
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		// Calcula el ancho de la imagen de fondo para mantener la proporción
-		int newWidth = (int) (backgroundImage.getIconWidth() * ((double)getHeight() / backgroundImage.getIconHeight()));
-		
-		// Dibuja la imagen de fondo
-		g.drawImage(backgroundImage.getImage(), Background.x, 0, newWidth, getHeight(), this);
-		
-		// Escala el ImageIcon del jugador al nuevo tamaño
-		int newPlayerWidth = 75; // Nueva anchura del jugador en píxeles
-		int newPlayerHeight = 75; // Nueva altura del jugador en píxeles
-		ImageIcon scaledPlayerIcon = new ImageIcon(playerImage.getImage().getScaledInstance(newPlayerWidth, newPlayerHeight, Image.SCALE_DEFAULT));
-		
-		// Pinta el ImageIcon escalado del jugador
-		if(player.xPosition>570){
-			scaledPlayerIcon.paintIcon(this, g, 570, player.yPosition);
-		}else{
-			scaledPlayerIcon.paintIcon(this, g, player.xPosition, player.yPosition);
-		}
+    private void drawPlayer(Graphics g) {
+        int newPlayerWidth = 75;
+        int newPlayerHeight = 75;
+        Image scaledPlayerImage = playerImage.getImage().getScaledInstance(newPlayerWidth, newPlayerHeight, Image.SCALE_DEFAULT);
+        ImageIcon scaledPlayerIcon = new ImageIcon(scaledPlayerImage);
+        int xPosition = player.xPosition > 570 ? 570 : player.xPosition;
+        scaledPlayerIcon.paintIcon(this, g, xPosition, player.yPosition);
+    }
 
-
-
-
-		player.gravity();
-		background.refresh_background();
-		repaint();
-	}
-	
-
-
-
-
-
+    private void updateGameObjects() {
+        player.gravity();
+        background.refreshBackground();
+    }
 }

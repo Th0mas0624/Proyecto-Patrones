@@ -5,7 +5,7 @@ public class Background {
     public static int  x=0;
     public static int  y=0;
 
-    public  void refresh_background(){
+    public  void refreshBackground(){
         // 470  - 570
         if (player.xPosition>= 570){
             int aux = player.xPosition - 570;
