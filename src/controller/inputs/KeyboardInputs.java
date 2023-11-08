@@ -3,12 +3,12 @@ package controller.inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import model.Decorator.SuperJump;
 import view.GamePanel;
 
 public class KeyboardInputs implements KeyListener {
 
 	private GamePanel gamePanel;
-
 	public KeyboardInputs(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
@@ -24,7 +24,11 @@ public class KeyboardInputs implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-
+		switch (e.getKeyCode()) {
+            case KeyEvent.VK_Z:
+                gamePanel.setZPress(false);
+                break;
+        }
 	}
 
 	@Override
@@ -46,7 +50,16 @@ public class KeyboardInputs implements KeyListener {
 		case KeyEvent.VK_D:
 			gamePanel.player.changeXDelta(5);
 			System.out.println(gamePanel.player.xPosition);
-
+			break;
+		case KeyEvent.VK_Z:
+			gamePanel.setZPress(true);
+			if(gamePanel.getZPress() == true){
+				gamePanel.player.operation();
+			}
+			break;
+		case KeyEvent.VK_K:
+			SuperJump s = new SuperJump(gamePanel.player);
+			gamePanel.player.SetJumps(s.operation());
 			break;
 		}
 

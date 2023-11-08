@@ -1,44 +1,39 @@
 package model.Flyweight;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.util.HashMap;
 
-import javax.swing.ImageIcon;
 
 public class MovingBullet {
 
-	private int x,y;
-	private Bullet state;
-	private HashMap<Integer, Bullet> bullets = new HashMap<>();
+	private float x,y;
+	private HashMap<String, Bullet> bullets = new HashMap<>();
 	
 	
-	public MovingBullet(int x, int y,Bullet state) {
-		this.state = state;
+	public MovingBullet(float x, float y) {
+		
 		this.x = x;
 		this.y = y;
 	}
 	
-	public Bullet getBullet(int type) {
+	public Bullet getBullet(String type) {
 		if (!bullets.containsKey(type)) {
             bullets.put(type, new Bullet(uploadImage(type)));
         }
         return bullets.get(type);
 	}
 	
-	public String uploadImage(int type) {
-		return "Bala_"+type+".png";
+	public String uploadImage(String type) {
+		return "assets/"+type+".png";
 	}
-	public void move(int x,int y) {
-		this.x += x;
-		this.y += y;
+	public void move() {
+		this.x += 10;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 	

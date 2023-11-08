@@ -62,7 +62,7 @@ public class GameMenu extends JPanel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameFrame.switchToGame();
+                gameFrame.switchToPlayerSelection();
             }
         });
     }

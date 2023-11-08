@@ -9,6 +9,6 @@ public class ImageMan implements Image{
 	}
 	@Override
 	public String getImage() {
-		return "./Pictures/Man";
+		return "assets";
 	}
 }

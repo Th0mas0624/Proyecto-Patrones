@@ -1,10 +1,13 @@
 package model.entitys;
 
+import java.util.ArrayList;
+
 import helps.Constans;
 import model.AbstractFactory.AbstractCharacter;
 import model.Decorator.ISkill;
 import model.Flyweight.Bullet;
 import model.Flyweight.MovingBullet;
+import model.Observer.Observer;
 
 public class Player implements ISkill {
 
@@ -13,9 +16,10 @@ public class Player implements ISkill {
 	public int yPosition = 0;
 	private int health = 10;
 	public Bullet b = new Bullet("assets/bullet.png");
-	public MovingBullet m = new MovingBullet(xPosition, yPosition, b);
+	public MovingBullet m;
+	private int jumps = 100;
 	
-//	private List<Observer> observers = new ArrayList<>();
+	private java.util.List<Observer> observers = new ArrayList<>();
 	
 	// Instancia única del Singleton
     private static Player instance;
@@ -29,17 +33,16 @@ public class Player implements ISkill {
         if (instance == null) {
             instance = new Player(x, y);
         }
+		instance.m = new MovingBullet(x, y);
         return instance;
     }
 	
 	
 	
 	@Override
-	public void operation() {
+	public int operation() {
 		shoot();
-		jump();
-		moveRight();
-		moveLeft();
+		return 0;
 	}
 	public void gravity(){
 		if (yPosition < Constans.FIRST_FLOOR-3){
@@ -55,15 +58,11 @@ public class Player implements ISkill {
 
 	}
 	public void shoot() {
-		c.createWeapon().getWeapon();
-		m.move(xPosition, yPosition);      
+		m.move();      
 		//draw()
 	}
 	public void changeXDelta(int value) {
-		if (xPosition<=10185){
-			this.xPosition += value;
-		}
-
+		this.xPosition += value;
 	}
 	public void changeYDelta(int value) {
 		this.yPosition += value;
@@ -73,10 +72,14 @@ public class Player implements ISkill {
 		this.yPosition = y;
 	}
 	
-	
-	
+	public AbstractCharacter getC() {
+		return c;
+	}
+	public void setC(AbstractCharacter c){
+		this.c = c;
+	}
 	public void jump() {
-		this.yPosition -= 100;
+		this.yPosition -= jumps;
 	}
 	public void moveRight() {
 		this.xPosition += 2;
@@ -91,7 +94,7 @@ public class Player implements ISkill {
 		this.health -= damage;
 	}
 
-	/*public void addObserver(Observer observer) {
+	public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
@@ -104,5 +107,9 @@ public class Player implements ISkill {
             observer.updatePlayer(this);
             observer.updatePlayerHealth(health);
         }
-    }*/
+    }
+
+	public void SetJumps(int jumps){
+		this.jumps = jumps;
+	}
 }

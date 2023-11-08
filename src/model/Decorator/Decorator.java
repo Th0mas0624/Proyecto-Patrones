@@ -8,8 +8,9 @@ public class Decorator implements ISkill{
 	}
 
 	@Override
-	public void operation() {
+	public int operation() {
 		this.skill.operation();
+		return 0;
 	}
 
 }

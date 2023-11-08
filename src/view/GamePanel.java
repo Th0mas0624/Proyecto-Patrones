@@ -9,10 +9,12 @@ import model.entitys.Background;
 import model.entitys.Player;
 
 public class GamePanel extends JPanel{
-	private ImageIcon playerImage; // Variable para la imagen del jugador
+	public ImageIcon playerImage; // Variable para la imagen del jugador
 	private ImageIcon backgroundImage;
 	private Background background = new Background();
 	public Player player = Player.getInstance(100, 100);
+
+	
 
 
 	public GamePanel() {
@@ -20,6 +22,15 @@ public class GamePanel extends JPanel{
         setPanelSize();
         addKeyListener(new KeyboardInputs(this));
     }
+
+	private boolean Zpress = false;
+	public void setZPress(boolean Zpress){
+		this.Zpress = Zpress;
+	}
+
+	public boolean getZPress(){
+		return this.Zpress;
+	}
 
     private void loadAssets() {
         playerImage = new ImageIcon("assets/player_sprite.png");
@@ -55,6 +66,9 @@ public class GamePanel extends JPanel{
     }
 
     private void updateGameObjects() {
+		if (this.player.getC().createWeapon().getWeapon() != null){
+			this.playerImage = new ImageIcon(this.player.getC().createWeapon().getWeapon());
+		}
         player.gravity();
         background.refreshBackground();
     }

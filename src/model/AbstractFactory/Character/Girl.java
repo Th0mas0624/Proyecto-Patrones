@@ -13,7 +13,7 @@ public class Girl implements AbstractCharacter{
 
 	@Override
 	public Weapon createWeapon() {
-		return WeaponMan.getInstance();
+		return WeaponGirl.getInstance();
 	}
 
 }

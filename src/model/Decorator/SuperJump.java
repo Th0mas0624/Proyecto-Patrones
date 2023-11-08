@@ -7,8 +7,9 @@ public class SuperJump extends Decorator{
 	}
 	
 	@Override
-	public void operation() {
+	public int operation() {
 		super.operation();
 		//Realizar implementacion
+		return 200;
 	}
 }
